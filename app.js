@@ -1,11 +1,16 @@
-Vue.component('click-counter', {
-  data() {
-    return {
-      count: 0
+Vue.component('plan', {
+  template: '#plan-template',
+  props: {
+    name: {
+      type: String,
+      required: true
     }
   },
-  template: '#click-counter-template'
 })
+
 new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    plans: ['The Single', 'The Curious', 'The Addict', 'The Alpes Gourmet']
+  }
 })
