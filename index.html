@@ -11,25 +11,41 @@
 <body class="bg-gray-50 min-h-screen flex items-center justify-center">
   <div id="app">
     <div class="w-full max-w-2xl mx-auto">
-      <h1 class="text-4xl font-bold text-gray-800 text-center">Coffe Plans</h1>
-      <h2 class="w-96 text-xl font-thin text-gray-600 text-center">We travel the world to source the very best single origin coffe for you</h2>
+      <h1 class="text-4xl font-bold text-gray-800 text-center mb-8">VueJS Slots Fundamentals</h1>
 
-      <plan-picker></plan-picker>
+      <div class="flex flex-col space-y-4">
+        <todo-item>
+          Buy Bananas
+          <template #description>
+            <p class="text-gray-400">Bananas are good for you health</p>
+          </template>
+          <template #button-text>
+            Clicked Me
+          </template>
+        </todo-item>
+
+        <todo-item>
+          Eat Bananas
+        </todo-item>
+        
+        <todo-item>
+          Celebrate
+        </todo-item>
+      </div>
 
     </div>
   </div>
 
-  <script type="text/x-template" id="plan-picker-template">    
-    <div class="flex flex-col items-center space-y-4 mt-12">
-      <plan-picker-item v-for="plan in plans" :name="plan" :key="plan" @select="selectPlan" :selected-plan="selectedPlan"></plan-picker-item> 
-    </div>
-  </script>
-
-  <script type="text/x-template" id="plan-picker-item-template">
-    <div @click="select" class="w-96 rounded-md shadow p-4" :class="[isSelected ? 'bg-indigo-500 text-gray-200' : 'bg-white text-gray-800']">
-      <div>
-        <h3 class="font-semibold">{{ name }}</h3>
-      </div>
+  <script type="text/x-template" id="todo-item">
+    <div class="bg-white rounded-md shadow p-4">
+      <input type="checkbox" v-model="completed">
+      <span :class="{'line-through text-teal-500': completed}">
+        <slot></slot>
+      </span>
+      <slot name="description"></slot>
+      <button class="block bg-indigo-500 text-white rounded-md py-1 px-4 mt-4">
+        <slot name="button-text">Highlight</slot>
+      </button>
     </div>
   </script>
   
