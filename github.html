@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Github Profiles</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div id="app">
+    <div class="w-full max-w-7xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 text-center mb-8">Github Profiles</h1>
+
+      <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <github-user-card
+          v-for="username in usernames"
+          :username="username"
+          :key="username"
+        ></github-user-card>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/x-template" id="github-user-card-template">
+    <div class="w-52 bg-white rounded-md shadow overflow-hidden">
+      <img :src="user.avatar_url" alt="" class="object-cover">
+      <div class="py-2 px-4">
+        <h2>
+          <a :href="`https://github.com/${username}`" target="_blank" class="text-gray-700 hover:text-indigo-500 font-bold text-md">{{ user.name }}</a>
+        </h2>
+        <small class="text-gray-400 text-xs">Joined in {{ user.created_at }}</small>
+        <p class="text-sm text-gray-600">{{ user.bio }}</p>
+      </div>
+      <div class="py-2 px-4 border-t border-gray-100">        
+        <p class="text-sm text-gray-600">{{ user.followers }} Friends</p>
+      </div>
+    </div>
+  </script>
+  
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    Vue.component('github-user-card', {
+      template: '#github-user-card-template',
+      props: {
+        username: String,
+        required: true
+      },
+      data() {
+        return {
+          user: {}
+        }
+      },
+      created() {
+        axios.get(`https://api.github.com/users/${this.username}`)
+          .then(response => {
+            this.user = response.data
+          })
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        usernames: ['leoziondev', 'hootlex', 'rahaug', 'sdras', 'akryum']
+      }
+    })
+  </script>
+</body>
+</html>
