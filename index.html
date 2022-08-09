@@ -14,15 +14,17 @@
       <h1 class="text-4xl font-bold text-gray-800 text-center">Coffe Plans</h1>
       <h2 class="w-96 text-xl font-thin text-gray-600 text-center">We travel the world to source the very best single origin coffe for you</h2>
 
-      <div class="flex flex-col items-center space-y-4 mt-12">
-
-        <plan v-for="plan in plans" :name="plan"></plan> 
-
-      </div>
+      <plan-picker></plan-picker>
 
     </div>
   </div>
 
+  <script type="text/x-template" id="plan-picker-template">    
+    <div class="flex flex-col items-center space-y-4 mt-12">
+      <plan v-for="plan in plans" :name="plan"></plan> 
+    </div>
+  </script>
+  
   <script type="text/x-template" id="plan-template">
     <div class="w-96 bg-white rounded-md shadow p-4">
       <div>
