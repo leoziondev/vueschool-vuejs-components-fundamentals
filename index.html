@@ -21,11 +21,11 @@
 
   <script type="text/x-template" id="plan-picker-template">    
     <div class="flex flex-col items-center space-y-4 mt-12">
-      <plan v-for="plan in plans" :name="plan" :key="plan" @select="selectPlan" :selected-plan="selectedPlan"></plan> 
+      <plan-picker-item v-for="plan in plans" :name="plan" :key="plan" @select="selectPlan" :selected-plan="selectedPlan"></plan-picker-item> 
     </div>
   </script>
 
-  <script type="text/x-template" id="plan-template">
+  <script type="text/x-template" id="plan-picker-item-template">
     <div @click="select" class="w-96 rounded-md shadow p-4" :class="[isSelected ? 'bg-indigo-500 text-gray-200' : 'bg-white text-gray-800']">
       <div>
         <h3 class="font-semibold">{{ name }}</h3>
